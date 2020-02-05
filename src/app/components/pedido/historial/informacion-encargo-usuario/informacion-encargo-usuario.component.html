@@ -1,0 +1,139 @@
+<div class="col-md-12 mt-3">
+	<h3>{{page_title}}</h3>
+	<hr><br>
+	<div>
+		<h4><u>Editar Informació Comanda:</u></h4>
+		<br>
+		<div class="alert alert-success col-md-6 mt-3" *ngIf="status == 'success'">
+			Modificació Realitzada
+		</div>
+		<div class="alert alert-danger col-md-6 mt-3" *ngIf="status == 'error'">
+			Modificació No Realitzada
+		</div>
+		<br>
+		<form class="col-md-5 ml-0 pl-0" #editarUsuarioForm="ngForm" (ngSubmit)="onSubmit(editarEstadoEncargoForm)">
+			<div class="form-group">
+				<label for="estado">Editar Estat Comanda:</label>
+				<select class="browser-default custom-select" name="estado" class="form-control" #estado="ngModel" [(ngModel)]="encargo.estado" required>
+			  		<option [value]="'Demanat'">Demanat</option>
+			  		<option [value]="'Confirmat'">Confirmat</option>
+			  		<option [value]="'De Camí'">De Camí</option>
+			  		<option [value]="'Finalitzat'">Finalitzat</option>
+			  		<option [value]="'Error'">Error</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="infoRestaurante">Editar Comunicat Restaurant:</label>
+				<input type="text" name="infoRestaurante" class="form-control" #infoRestaurante="ngModel" [(ngModel)]="encargo.informacionRestaurante">
+			</div>
+			<input type="submit" value="Editar" class="btn btn-outline-secondary"/>
+		</form>
+		<br>
+	</div>
+	<div *ngIf ="encargo.informacionUsuario != '' ">
+		<br>
+		<hr>
+		<br>
+		<h5><strong>Comunicat Usuari:</strong></h5>
+		<h5>{{encargo.informacionUsuario}}</h5>
+	</div>
+	<br>
+	<hr><br>
+	<div>
+		<h4><u>Plats De La Comanda:</u></h4>
+		<br><br>
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item" *ngFor="let plato of conjuntoPlatos">
+				<span *ngIf="plato.plato != null && plato.precioTotal != 0">
+					<h5>
+						<u><b>{{plato.plato.nombre}}</b></u>: 
+					</h5>
+					<h6>
+						<strong>Ingredients:</strong>
+						{{plato.plato.descripcion}}
+						<br>
+						<strong *ngIf="plato.existIngExtra == true">Extres: </strong> 
+						<span *ngFor="let ingrediente of ingredientes">
+							<span *ngIf="ingrediente.conjuntoplatos.id == plato.id">
+								[{{ingrediente.ingrediente.nombre}}]  
+							</span>
+						</span>
+						<span *ngIf="plato.existIngExtra == true">
+							<br>
+						</span>
+						<strong>Quantitat: </strong>
+						{{plato.cantidad}}
+						<br>
+						<strong>Preu: </strong> 
+						<i>{{plato.precioTotal | generatePrecio}}€</i>
+					</h6>
+					<br>
+				</span>
+			</li>
+		</ul>
+		<br>
+		<h5>Preu Total: {{encargo.preciototal | generatePrecio}}€</h5>
+		<br>
+		<br>
+		<hr>
+		<br>
+		<h4><u>Informació Extra</u></h4>
+		<br>
+		<h5>Entrega de la comanda:</h5>
+		<br>
+		<div class="form-group">
+			<div class="radio">
+				<label class="checkbox-inline">
+					<input type="radio" name="vivienda" #vivienda="ngModel" [(ngModel)]="encargo.vivienda" [value]="'Recollir'"> Recollir a l'establiment
+				</label>
+			</div>
+			<div class="radio">
+				<label class="checkbox-inline">
+					<input type="radio" name="vivienda" #vivienda="ngModel" [(ngModel)]="encargo.vivienda" [value]="'Poble'"> Portar a domicili poble (+1,00€)
+				</label>
+			</div>
+			<div class="radio">
+				<label class="checkbox-inline">
+					<input type="radio" name="vivienda" #vivienda="ngModel" [(ngModel)]="encargo.vivienda" [value]="'Urbanitzacio'"> Portar a domicili urbanització (+1,50€)
+				</label>
+			</div>
+		</div>
+		<br>
+		<h5>Forma de pagament:</h5>
+		<br>
+		<div class="form-group">
+			<div class="radio">
+				<label class="checkbox-inline">
+					<input type="radio" name="efectivo-1" #efectivo="ngModel" [(ngModel)]="encargo.efectivo" [value]=true> En efectiu
+				</label>
+			</div>
+			<div class="radio">
+				<label class="checkbox-inline">
+					<input type="radio" name="efectivo-2" #efectivo="ngModel" [(ngModel)]="encargo.efectivo" [value]=false> Targeta
+				</label>
+			</div>
+		</div>
+	</div>
+	<br>
+	<hr><br>
+	<div>
+		<h4><u>Informació Usuari:</u></h4>
+		<br>
+		<h5>
+			<table>
+				<tr>
+					<th>Usuari:</th>
+					<td>{{usuario.nombre}} {{usuario.apellidos}}</td>
+				</tr>
+				<tr>
+					<th>Adreça:</th>
+					<td>{{usuario.direccionCasa}}</td>
+				</tr>
+				<tr>
+					<th>Telèfon</th>
+					<td>{{usuario.telefono}}</td>
+				</tr>
+			</table>
+		</h5>
+	</div>
+</div>

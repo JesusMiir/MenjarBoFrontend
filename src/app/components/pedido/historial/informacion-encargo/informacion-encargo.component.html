@@ -1,0 +1,101 @@
+<div class="col-md-12 mt-3">
+	<h3>{{page_title}}</h3>
+	<hr>
+	<br>
+	<br>
+	<h4><u>Informació Comanda</u></h4>
+	<br><br>
+	<h5>
+		<table class="table table-borderless">
+			<thead>
+					<tr>
+						
+					</tr>
+				</thead>
+				<tbody>
+				<tr scope="row">
+					<th class="col-mt-3">Identificador De La Comanda: </th>
+					<td class="col-mt-9">{{encargo.id}}</td>
+				</tr>
+				<tr scope="row">
+					<th class="col-mt-3">Estat De La Comanda: </th>
+					<td class="col-mt-9">{{encargo.estado}}</td>
+				</tr>
+				<tr *ngIf ="encargo.informacionrestaurante != '' " scope="row">
+						<th class="col-mt-3">Comunicat Restaurant: </th>
+					<td class="col-mt-9">{{encargo.informacionrestaurante}}</td>
+					</tr>
+				<tr scope="row">
+					<th class="col-mt-3">Telèfon Restaurant: </th>
+					<td class="col-mt-9">{{restaurante.telefono}}</td>
+				</tr>
+				<tr scope="row" >
+					<th class="col-mt-3">Temps Espera: </th>
+					<td class="col-mt-9">{{encargo.tiempoEspera}} min</td>
+				</tr>
+				<tr scope="row">
+					<th class="col-mt-3">Forma de pagament: </th>
+					<td *ngIf="encargo.efectivo == true" class="col-mt-9">
+						Efectiu
+					</td>
+					<td *ngIf="encargo.efectivo == false" class="col-mt-9">
+						Targeta De Crèdit
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</h5>
+	<br>
+	<br>
+	<hr>
+	<br>
+	<br>
+	<div>
+		<h4><u>Plats De La Comanda:</u></h4>
+		<br><br>
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item" *ngFor="let plato of conjuntoPlatos">
+				<span *ngIf="plato.plato != null && plato.precioTotal != 0">
+					<h5>
+						<u><b>{{plato.plato.nombre}}</b></u>: 
+					</h5>
+					<h6>
+						<strong>Ingredients:</strong>
+						{{plato.plato.descripcion}}
+						<br>
+						<strong *ngIf="plato.existIngExtra == true">Extres: </strong> 
+						<span *ngFor="let ingrediente of ingredientes">
+							<span *ngIf="ingrediente.conjuntoplatos.id == plato.id">
+								[{{ingrediente.ingrediente.nombre}}]  
+							</span>
+						</span>
+						<span *ngIf="plato.existIngExtra == true">
+							<br>
+						</span>
+						<strong>Quantitat: </strong>
+						{{plato.cantidad}}
+						<br>
+						<strong>Preu: </strong> 
+						<i>{{plato.precioTotal | generatePrecio}}€</i>
+					</h6>
+					<br>
+				</span>
+			</li>
+		</ul>
+		<div *ngIf="encargo.vivienda == 'Recollir'">
+			<small><i><b>Entrega de la comanda a Recollir GRATIS</b></i></small>
+		</div>
+		<div *ngIf="encargo.vivienda == 'Poble'">
+			<small><i><b>Entrega de la comanda a Poble (+1,00€)</b></i></small>
+		</div>
+		<div *ngIf="encargo.vivienda == 'Urbanitzacio'">
+			<small><i><b>Entrega de la comanda a Urbanització (+1,50€)</b></i></small>
+		</div>
+		<br>
+		<h5>
+			<strong>Preu Total: </strong>
+			<i>{{encargo.preciototal | generatePrecio}}</i>€
+		</h5>
+		<br><br>
+	</div>
+</div>

@@ -1,0 +1,15 @@
+<div class="col-md-12 mt-3">
+	<h1>
+	  {{page_title}}
+	</h1>
+	<hr>
+		<strong><a [routerLink]="['/ingredient/nou']">Crear Ingrediente</a></strong>
+	<hr>
+	
+	<ul class="navbar-nav mr-auto">
+		<li class="nav-item" *ngFor="let ingrediente of ingredientes">
+			<a class="nav-link" [routerLink]="['/ingredient/informacio/', ingrediente.id, ingrediente.nombre]">{{ingrediente.nombre}} - {{ingrediente.categoria.nombre}}</a>
+		</li>
+	</ul>
+
+</div>

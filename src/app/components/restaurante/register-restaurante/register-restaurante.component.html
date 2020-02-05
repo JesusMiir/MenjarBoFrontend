@@ -1,0 +1,70 @@
+<div class="col-md-12 mt-3">
+	<h1>{{page_title}}</h1>
+	<hr>
+	<br>
+
+	<div class="alert alert-success col-md-6 mt-3" *ngIf="status == 'success'">
+		El registre s'ha completat correctamente, <a [routerLink]="['/restaurant/login']"> iniciar sessió aquí</a>
+	</div>
+
+	<div class="alert alert-danger col-md-6 mt-3" *ngIf="status == 'error'">
+		El registre no s'ha realizat correctament
+	</div>		
+
+	<!-- Forumulario de registro-->
+	<form class="col-md-5 ml-0 pl-0" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+		<div class="form-group">
+			<label for="name">Nom</label>
+			<input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="restaurante.nombre" required>
+
+			<small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+				El nom no és vàlid
+			</small>
+		</div>
+
+		<div class="form-group">
+			<label for="email">Email</label>
+			<input type="email" name="email" class="form-control" #email="ngModel" [(ngModel)]="restaurante.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+
+			<small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">
+				El correu no es vàlid
+			</small>
+		</div>
+
+		<div class="form-group">
+			<label for="password">Contraseña</label>
+			<input type="password" name="password" class="form-control" #password="ngModel" [(ngModel)]="restaurante.contrasena" required>
+
+			<small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">
+				La contrasenya no és vàlida
+			</small>
+		</div>
+
+		<div class="form-group">
+			<label for="direccion">Adreça Restaurant</label>
+			<input type="text" name="direccion" class="form-control" #direccion="ngModel" [(ngModel)]="restaurante.direccionRestaurante">
+		</div>
+
+		<div class="form-group">
+			<label for="telefono">Telèfon</label>
+			<input type="text" name="telefono" class="form-control" #telefono="ngModel" [(ngModel)]="restaurante.telefono" pattern="[0-9]+" required>
+
+			<small *ngIf="!telefono.valid && telefono.touched" class="invalid-feedback d-block">
+				El teléfono no és vàlid
+			</small>
+		</div>
+
+
+		<div class="form-group">
+			<label for="codigoIntroducido">Codi</label>
+			<input type="password" name="codigoIntroducido" class="form-control" #codigoIntroducido="ngModel" [(ngModel)]="codigo" required>
+
+			<small *ngIf="!codigoIntroducido.valid && codigoIntroducido.touched" class="invalid-feedback d-block">
+				Introdueix el codi correctament
+			</small>
+		</div>
+
+
+		<input type="submit" value="Registrarme" class="btn btn-outline-secondary" [disabled]="registerForm.invalid"/>
+	</form>
+</div>

@@ -1,0 +1,50 @@
+<div class="col-md-12 mt-3">
+	<h1>{{page_title}}</h1>	
+	<hr>
+
+	<div class="alert alert-danger col-md-6 mt-3" *ngIf="status == 'error'">
+		Els camps Pasta és obligatori.
+	</div>
+	<!-- Forumulario de crear Pasta Fresca-->
+	<form #categoriaForm="ngForm" (ngSubmit)="onSubmit(categoriaForm)" class="col-md-12">
+		<br>
+		<div class="container">
+  			<div class="row">
+				<div class="form-group" class="col-md-6">
+					<label for="pasta_"><b>Pasta: *</b></label>
+					<select class="form-control col-md-6" name="pasta_" [(ngModel)]='pasta' (ngModelChange)="cambiarPasta()">
+					  	<option value='Tria Opció'>Tria Opció</option>
+					  	<option value='Tagliatelle'>Tagliatelle</option>
+					  	<option value='Ravioli Foie i Boletus'>Ravioli Foie i Boletus (+1,50)</option>
+					</select>
+				</div>
+				<div class="form-group" class="col-md-6">
+					<label for="salsa_"><b>Salsa: </b></label>
+					<select class="form-control col-md-6" name="salsa_" [(ngModel)]='salsa' (ngModelChange)="cambiarSalsa()">
+						<option value='Tria Opció'>Tria Opció</option>
+						<option value='Bolonyesa'>Bolonyesa</option>
+					  	<option value='Pesto'>Pesto</option>
+					  	<option value='Carbonara Ingredients'>Carbonara Ingredients</option>
+					  	<option value='Boletus'>Boletus</option>
+					  	<option value='Formatge'>Formatge</option>
+					  	<option value='Marinera'>Marinera (+0,50)</option>
+					</select>
+				</div>
+			</div>
+			<br><br>
+			<div class="row">
+				<div class="form-group" class="col-md-3">
+				</div>
+				<div class="form-group" class="col-md-9">
+					<h5 >Preu Total: {{precio | generatePrecio}}€</h5>
+				</div>
+			</div>
+			<br><br>
+			<div *ngIf="idCategoria != null" class="row">
+				<div class="form-group" class="col-md-6">
+					<input type="submit" value="Següent" class="btn btn-outline-secondary" [disabled]="categoriaForm.invalid">
+				</div>
+			</div>
+		</div>
+	</form>	
+</div>

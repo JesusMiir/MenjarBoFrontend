@@ -1,0 +1,75 @@
+<div class="col-md-12 mt-3">
+	<h1>
+	  {{page_title}}
+	</h1>
+	<hr>
+	<br>
+
+	<div class="col-md-8">
+		<ul class="navbar-nav mr-auto">
+			<li>	
+				<br>
+				<div class="form-group">
+					<label for="vivienda"><strong>Entrega de la comanda:</strong></label>
+				
+					<div class="radio">
+						<label class="checkbox-inline">
+							<input type="radio" name="vivienda" #vivienda="ngModel" [(ngModel)]="encargo.vivienda" [value]="'Recollir'" (change)="plusVivienda()"> Recollir a l'establiment
+						</label>
+					</div>
+					<div class="radio">
+						<label class="checkbox-inline">
+							<input type="radio" name="vivienda" #vivienda="ngModel" [(ngModel)]="encargo.vivienda" [value]="'Poble'" (change)="plusVivienda()"> Portar a domicili poble (+1,00€)
+						</label>
+					</div>
+					<div class="radio">
+						<label class="checkbox-inline">
+							<input type="radio" name="vivienda" #vivienda="ngModel" [(ngModel)]="encargo.vivienda" [value]="'Urbanitzacio'" (change)="plusVivienda()"> Portar a domicili urbanització (+1,50€)
+						</label>
+					</div>
+				</div>
+				<br>
+				<div class="form-group">
+					<label for="efectivo"><strong>Forma de pagament:</strong></label>
+					<br>
+					<div class="radio">
+						<label class="checkbox-inline">
+							<input type="radio" name="efectivo-1" #efectivo="ngModel" [(ngModel)]="encargo.efectivo" [value]=true> En efectiu
+						</label>
+					</div>
+					<div class="radio">
+						<label class="checkbox-inline">
+							<input type="radio" name="efectivo-2" #efectivo="ngModel" [(ngModel)]="encargo.efectivo" [value]=false> Targeta
+						</label>
+					</div>
+				</div>
+				<br>
+				<hr>
+			</li>
+			<li>	
+				<br>
+				<div class="form-group">
+					<label for="comentari"><strong>Comentari al Restaurant:</strong></label>
+					<input type="text" name="comentari" class="form-control" #comentari="ngModel" [(ngModel)]="encargo.informacionusuario">
+				</div>
+				<br>
+				<hr>
+			</li>
+			<li>
+				<br>
+				<h5><b>Preu Total:</b><i> {{encargo.preciototal | generatePrecio}}€</i></h5>
+				<br>
+				<hr>
+			</li>
+			<li>
+				<strong>
+					<br>
+					<button type="button" class="btn btn-outline-secondary" (click)="realizarPedido()">
+						Finalizar
+					</button>
+				</strong>
+			</li>
+		</ul>
+	</div>
+	
+</div>

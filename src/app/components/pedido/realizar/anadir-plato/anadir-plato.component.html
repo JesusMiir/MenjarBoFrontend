@@ -1,0 +1,29 @@
+<div class="col-md-12 mt-3">
+	<h1>
+	  {{page_title}}
+	</h1>
+	<hr><br>
+	<div class="container">
+		<ul class="navbar-nav mr-auto">
+			<div class="row">
+				<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" *ngFor="let plato of platos">
+					<a class="nav-link" (click)="escogerPlato(plato.nombre)">
+						<li class="nav-item" >
+							<button class="cuadro">
+								<h4><u>{{plato.nombre}}</u></h4> 
+								<div *ngIf="plato.descripcion != ''">	
+									<strong>Ingredients: </strong> {{plato.descripcion}} <br>
+								</div>
+								<div *ngIf="idConjuntoElementos == null">
+									<i>Preu: {{plato.precio | generatePrecio}}€</i>
+								</div>
+								<br><br>
+							</button> 
+						</li>
+					</a>
+				</div>
+			</div>
+		</ul>
+	</div>
+
+</div>

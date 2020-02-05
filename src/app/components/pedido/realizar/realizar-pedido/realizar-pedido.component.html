@@ -1,0 +1,106 @@
+<div class="col-md-12 mt-3">
+	<h1>
+	  {{page_title}}
+	</h1>
+	<hr><br>
+	<div *ngIf="restaurante.abierto == true" class="col-md-8">
+		
+		<div *ngIf="informacionValida == true">
+			<h6>Número de telèfon: <strong> {{restaurante.telefono}} </strong></h6>
+			<h6>Temps d'espera: <strong> {{restaurante.tiempoPedidos}} min</strong></h6>
+		</div>
+		<br>
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item"> 
+				<hr>
+				<br>
+				<strong>
+					<button type="button" class="btn btn-outline-secondary" [routerLink]="['/comanda/', encargo.id, 'triar-categoria']">
+						Afegir Plat
+					</button>
+				</strong>
+				<br><br>
+			</li>
+
+			<li class="nav-item" *ngIf="validTamanoPlatos">
+				<hr>
+				<br>
+				<h4>
+					<strong>Plats Seleccionats:</strong>
+				</h4>
+				<br>
+			</li>
+
+			<table class="table table-borderless">
+				<thead>
+					<tr>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody *ngFor="let plato of conjuntoPlatos">
+					<tr *ngIf="plato.plato != null && plato.precioTotal != 0">
+						<td>
+							<h5>
+								<u><b>{{plato.plato.nombre}}</b></u>:  
+							</h5>
+							<h6>
+								<strong>Ingredients:</strong>
+								{{plato.plato.descripcion}}
+								<br>
+								<strong *ngIf="plato.existIngExtra == true">Extres: </strong> 
+								<span *ngFor="let ingrediente of ingredientes">
+									<span *ngIf="ingrediente.conjuntoplatos.id == plato.id">
+										[{{ingrediente.ingrediente.nombre}}]  
+									</span>
+								</span>
+								<span *ngIf="plato.existIngExtra == true">
+									<br>
+								</span>
+								<strong>Quantitat: </strong>
+								{{plato.cantidad}}
+								<br>
+								<strong>Preu: </strong> 
+								<i>{{plato.precioTotal | generatePrecio}}€</i>
+							</h6>
+						</td>
+						<td>
+							<button type="button" class="btn btn-outline-danger" (click)="eliminarPlato(plato.id)" (click)="refresh()"> 
+								<small> X </small> 
+							</button> 
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<li *ngIf="validTamanoPlatos">
+				<br><br>
+				<h5><b>Preu Total:</b><i> {{encargo.preciototal | generatePrecio}}€</i></h5>
+				<br>
+			</li>
+
+			<li>
+				<strong *ngIf="validTamanoPlatos">
+					<br>
+					<hr>
+					<br>
+					<button type="button" class="btn btn-outline-secondary"  (click)="realizarPedido()">
+						Següent
+					</button>
+				</strong>
+			</li>
+	
+		</ul>
+	</div>
+	<div *ngIf="restaurante.abierto == false">
+		<br>
+		<h4>
+			<b>Fora De Servei</b>
+		</h4>
+		<br> 
+		<div class="col-md-8 p-3 mb-2 bg-warning text-dark">
+			<h4><i>"El Restaurant {{restaurante.nombre}} no realitza comandes en aquest moment,
+			intenteu-ho més tard."</i></h4>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,62 @@
+<div class="col-md-12 mt-3">
+	<h1>Editar Menú - {{page_title}}</h1>
+	<br>
+	
+	<div class="alert alert-success col-md-6 mt-3" *ngIf="status == 'success'">
+		El menú s'ha modificat correctament
+	</div>
+
+	<div class="alert alert-danger col-md-6 mt-3" *ngIf="status == 'error'">
+		El menú no s'ha modificat correctament
+	</div>		
+	
+
+	<!-- Forumulario de crear menú-->
+	
+	<form #menuForm="ngForm" (ngSubmit)="onSubmit(menuForm)" class="col-md-5">
+		<div class="form-group">
+			<label for="nombre">Canvia el nom del menú:</label>
+			<input type="text" name="nombre" class="form-control" #nombre="ngModel" [(ngModel)]="menu.nombre" required />
+			<small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">
+				El nom del menú no és vàlid
+			</small>
+		</div>
+		<div class="form-group">
+			<label for="nombrePrimero">Canvia el nom del primer plat del menú:</label>
+			<input type="text" name="nombrePrimero" class="form-control" #nombrePrimero="ngModel" [(ngModel)]="menu.nombrePrimero" required />
+			<small *ngIf="!nombrePrimero.valid && nombrePrimero.touched" class="invalid-feedback d-block">
+				El nom del primer plat del menú no és vàlit
+			</small>
+		</div>
+		<div class="form-group">
+			<label for="descripcionPrimero">Canvia la descripció del primer plat del menú:</label>
+			<input type="text" name="descripcionPrimero" class="form-control" #descripcionPrimero="ngModel" [(ngModel)]="menu.descripcionPrimero" required />
+			<small *ngIf="!descripcionPrimero.valid && descripcionPrimero.touched" class="invalid-feedback d-block">
+				La descripció del menú no és vàlida
+			</small>
+		</div>
+		<div class="form-group">
+			<label for="nombreSegundo">Canvia el nom del segon plat del menú:</label>
+			<input type="text" name="nombreSegundo" class="form-control" #nombreSegundo="ngModel" [(ngModel)]="menu.nombreSegundo" required />
+			<small *ngIf="!nombreSegundo.valid && nombreSegundo.touched" class="invalid-feedback d-block">
+				El nom del segon plat no és vàlit
+			</small>
+		</div>
+		<div class="form-group">
+			<label for="descripcionSegundo">Canvia la descripció del segon plat del menú:</label>
+			<input type="text" name="descripcionSegundo" class="form-control" #descripcionSegundo="ngModel" [(ngModel)]="menu.descripcionSegundo" required />
+			<small *ngIf="!descripcionSegundo.valid && descripcionSegundo.touched" class="invalid-feedback d-block">
+				La descripció del segon plat del menú no és vàlita
+			</small>
+		</div>
+		<div class="form-group">
+			<label for="precio">Canvia el preu del menú:</label>
+			<input type="text" name="precio" class="form-control" #precio="ngModel" [(ngModel)]="menu.precio" required pattern="[0-9.,]+"/>
+			<small *ngIf="!precio.valid && precio.touched" class="invalid-feedback d-block">
+				El preu del menú no és vàlit
+			</small>
+		</div>
+		<input type="submit" value="Guardar" class="btn btn-outline-secondary" [disabled]="menuForm.invalid">
+	</form>	
+	
+</div>

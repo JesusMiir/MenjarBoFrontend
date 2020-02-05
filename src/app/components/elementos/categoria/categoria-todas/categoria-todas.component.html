@@ -1,0 +1,14 @@
+<div class="col-md-12 mt-3">
+	<h1>
+	  {{page_title}}
+	</h1>
+	<hr>
+	<strong><a [routerLink]="['/categoria/nova']">Crear Categoria</a></strong>
+	<hr>
+	<ul class="navbar-nav mr-auto">
+		<li class="nav-item" *ngFor="let categoria of categorias">
+			<a class="nav-link" [routerLink]="['/categoria/informacio/', categoria.id, categoria.nombre]">{{categoria.nombre}}</a>
+		</li>
+	</ul>
+
+</div>

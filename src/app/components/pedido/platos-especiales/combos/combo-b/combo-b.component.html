@@ -1,0 +1,70 @@
+<div class="col-md-12 mt-3">
+	<h1>{{page_title}}</h1>
+	<hr>
+	<br><br>
+	<div *ngIf="status == 'error'" class="col-4 p-3 mb-2 bg-danger text-white">
+		Selecciona tots els elements del Combo
+	</div>
+	<br><br>
+	<h4>
+		<b><u>Tria Els Teus Plats</u></b>
+	</h4>
+	<br><br>
+	<table class="table table-borderless">
+		<thead>
+		</thead>
+		<tbody>
+			<tr>
+				<th th scope="row"><h5><b>Beguda</b></h5></th>
+				<td>
+					<select class="form-control col-md-10 " name="bebida_" [(ngModel)]='bebida'>
+					  	<option [ngValue]='Seleccionar'>Seleccionar La Beguda</option>
+					  	<option [ngValue]='plato' *ngFor='let plato of platosBebidas' >{{plato.nombre}}</option>
+					</select>
+				</td>
+				<td>
+					<button type="button" class="btn btn-outline-success" (click)="SeleccionarBebida()">
+						Veure Plats
+					</button>
+				</td>
+			</tr>
+			<tr>
+				<th th scope="row"><h5><b>Pizza</b></h5></th>
+				<td>
+					<select class="form-control col-md-10 " name="pizza_" [(ngModel)]='pizza'>
+					  	<option [ngValue]='Seleccionar'>Seleccionar El Plat De Pizza</option>
+					  	<option [ngValue]='plato' *ngFor='let plato of platosPizza' >{{plato.nombre}}</option>
+					</select>
+				</td>
+				<td>
+					<button type="button" class="btn btn-outline-success" (click)="SeleccionarPizza()">
+						Veure Plats
+					</button>
+				</td>
+			</tr>
+			<tr>
+				<th th scope="row"><h5><b>Crepe</b></h5></th>
+				<td>
+					<select class="form-control col-md-10 " name="crepe_" [(ngModel)]='crepe'>
+					  	<option [ngValue]='Seleccionar'>Seleccionar El Plat De Crepe</option>
+					  	<option [ngValue]='plato' *ngFor='let plato of platosCrepes' >{{plato.nombre}}</option>
+					</select>
+				</td>
+				<td>
+					<button type="button" class="btn btn-outline-success" (click)="SeleccionarCrepe()">
+						Veure Plats
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br><br>
+	<h5><b>Preu: </b><i>{{plato.precio | generatePrecio}}</i>€</h5>
+	<br><br>
+	<strong>
+		<br>
+		<button type="button" class="btn btn-outline-secondary" (click)="anadirPlato()">
+			Següent
+		</button>
+	</strong>
+</div>

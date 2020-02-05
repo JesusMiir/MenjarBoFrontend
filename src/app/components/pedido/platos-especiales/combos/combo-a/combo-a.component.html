@@ -1,0 +1,231 @@
+<div class="col-md-12 mt-3">
+	<h1>{{page_title}}</h1>
+	<hr>
+	<br><br>
+	<h4>
+		<b><u>Tria Els Teus Plats</u></b>
+	</h4>
+	<br><br>
+	<table class="table table-borderless">
+		<thead>
+		</thead>
+		<tbody>
+			<tr>
+				<th th scope="row"><h5><b>Beguda</b></h5></th>
+				<td>
+					<select class="form-control col-md-10 " name="pizza_" [(ngModel)]='bebida'>
+					  	<option [ngValue]='Seleccionar'>Seleccionar La Beguda</option>
+					  	<option [ngValue]='plato' *ngFor='let plato of platosBebidas' >{{plato.nombre}}</option>
+					</select>
+				</td>
+				<td>
+					<button type="button" class="btn btn-outline-success" (click)="SeleccionarBebida()">
+						Veure Plats
+					</button>
+				</td>
+			</tr>
+			<tr>
+				<th th scope="row"><h5><b>Patates Fregides</b></h5></th>
+				<td>
+					Patates Fregides De Menorca
+				</td>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th th scope="row"><h5><b>Hamburguesa</b></h5></th>
+				<td *ngIf="descripcion == ''">
+					Crea sa teua Hamburguesa...
+				</td>
+				<td *ngIf="descripcion != ''">
+					{{descripcion}}
+				</td>
+				<td>
+					<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target=".bd-example-modal-lg">
+						Crear +
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br><br>
+	<h5><b>Preu: </b> <i>{{plato.precio | generatePrecio}}</i>€</h5>
+	<br><br>
+	<strong>
+		<br>
+		<button type="button" class="btn btn-outline-secondary" (click)="anadirPlato()">
+			Següent
+		</button>
+	</strong>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    	<div class="modal-header">
+	        <h5 class="modal-title">
+	        	<h2>
+	        		<b>Sa Teua Hamburguesa</b>
+	        	</h2>
+	        </h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+      	</div>
+      	<div class="modal-body">
+      		
+      		<form #categoriaForm="ngForm" (ngSubmit)="onSubmit(categoriaForm)" class="col-md-12">
+				<br>
+				<div class="container">
+					<div *ngIf="status == 'error'">
+			      		
+						<div class="alert alert-danger col-md-12">
+							Els camps Hamburguesa i Pa són obligatoris.
+						</div>
+						<br>
+					</div>
+					<div *ngIf="status == 'success'">
+			      		
+						<div class="alert alert-success col-md-12">
+							L'Hamburguesa s'ha crear, ara surt per continuar la teva comanda.
+						</div>
+						<br>
+					</div>
+		  			<div class="row">
+						<div class="form-group" class="col-md-6">
+							<label for="hamburguesa_"><b>Hamburguesa: *</b></label>
+							<select class="form-control col-md-6" name="hamburguesa_" [(ngModel)]='hamburguesa'>
+							  	<option value='Tria Opció'>Tria Opció</option>
+							  	<option value='Vedella'>Vedella</option>
+							  	<option value='Pollastre'>Pollastre</option>
+							  	<option value='Mixta'>Mixta</option>
+							  	<option value='Verdura'>Verdura</option>
+							</select>
+						</div>
+						<div class="form-group" class="col-md-6">
+							<label for="vegetal3_"><b>Vegetal 3:</b></label>
+							<select class="form-control col-md-6" name="vegetal3_" [(ngModel)]='vegetal3'>
+								<option value='Tria Opció'>Tria Opció</option>
+							  	<option value='Rúcula'>Rúcula</option>
+							  	<option value='Lletuga'>Lletuga</option>
+							  	<option value='Tomàtiga'>Tomàtiga</option>
+							  	<option value='Cogombret'>Cogombret</option>
+							  	<option value='Ceba Crua'>Ceba Crua</option>
+							  	<option value='Ceba A La Planxa'>Ceba A La Planxa</option>
+							  	<option value='Ceba Cruixent'>Ceba Cruixent</option>
+							  	<option value='Ceba Caramel·litzada'>Ceba Caramel·litzada</option>
+							  	<option value='Xampinyons Crus'>Xampinyons Crus</option>
+							  	<option value='Xampinyons a la Planxa'>Xampinyons A La Planxa</option>
+							  	<option value='Pebre'>Pebre</option>
+							</select>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="form-group" class="col-md-6">
+							<label for="pan_"><b>Pa: *</b></label>
+							<select class="form-control col-md-6" name="pan_" [(ngModel)]='pan'>
+								<option value='Tria Opció'>Tria Opció</option>
+								<option value='Clàssic'>Clàssic</option>
+							  	<option value='Blanc Pagès'>Blanc Pagès</option>
+							</select>
+						</div>
+						<div class="form-group" class="col-md-6">
+							<label for="formatge_"><b>Formatge:</b></label>
+							<select class="form-control col-md-6" name="formatge_" [(ngModel)]='queso' (ngModelChange)="cambiarQueso()">
+								<option value='Tria Opció'>Tria Opció</option>
+							  	<option value='Edam'>Edam</option>
+							  	<option value='Formatge s’Arangí Maó-Menorca'>Formatge S’Arangí Maó-Menorca</option>
+							  	<option value='Brie'>Brie</option>
+							  	<option value='Formatge Blau'>Formatge Blau</option>
+							  	<option value='Cabra s’Arangí'>Cabra S’Arangí (+0,30)</option>
+							</select>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="form-group" class="col-md-6">
+							<label for="vegetal1_"><b>Vegetal 1:</b></label>
+							<select class="form-control col-md-6" name="vegetal1_" [(ngModel)]='vegetal1'>
+								<option value='Tria Opció'>Tria Opció</option>
+							  	<option value='Rúcula'>Rúcula</option>
+							  	<option value='Lletuga'>Lletuga</option>
+							  	<option value='Tomàtiga'>Tomàtiga</option>
+							  	<option value='Cogombret'>Cogombret</option>
+							  	<option value='Ceba Crua'>Ceba Crua</option>
+							  	<option value='Ceba A La Planxa'>Ceba A La Planxa</option>
+							  	<option value='Ceba Cruixent'>Ceba Cruixent</option>
+							  	<option value='Ceba Caramel·litzada'>Ceba Caramel·litzada</option>
+							  	<option value='Xampinyons Crus'>Xampinyons Crus</option>
+							  	<option value='Xampinyons a la Planxa'>Xampinyons A La Planxa</option>
+							  	<option value='Pebre'>Pebre</option>
+							</select>
+						</div>
+						<div class="form-group" class="col-md-6">
+							<label for="salsa_"><b>Salsa:</b></label>
+							<select class="form-control col-md-6" name="salsa_" [(ngModel)]='salsa' (ngModelChange)="cambiarSalsa()">
+								<option value='Tria Opció'>Tria Opció</option>
+							  	<option value='Mostassa'>Mostassa</option>
+							  	<option value='Quetxup'>Quetxup</option>
+							  	<option value='Maonesa'>Maonesa</option>
+							  	<option value='Allioli'>Allioli</option>
+							  	<option value='Brava Ingradients'>Brava Ingradients (+0,25)</option>
+							</select>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="form-group" class="col-md-6">
+							<label for="vegetal2_"><b>Vegetal 2:</b></label>
+							<select class="form-control col-md-6" name="vegetal2_" [(ngModel)]='vegetal2'>
+								<option value='Tria Opció'>Tria Opció</option>
+							  	<option value='Rúcula'>Rúcula</option>
+							  	<option value='Lletuga'>Lletuga</option>
+							  	<option value='Tomàtiga'>Tomàtiga</option>
+							  	<option value='Cogombret'>Cogombret</option>
+							  	<option value='Ceba Crua'>Ceba Crua</option>
+							  	<option value='Ceba A La Planxa'>Ceba A La Planxa</option>
+							  	<option value='Ceba Cruixent'>Ceba Cruixent</option>
+							  	<option value='Ceba Caramel·litzada'>Ceba Caramel·litzada</option>
+							  	<option value='Xampinyons Crus'>Xampinyons Crus</option>
+							  	<option value='Xampinyons a la Planxa'>Xampinyons A La Planxa</option>
+							  	<option value='Pebre'>Pebre</option>
+							</select>
+						</div>
+						<div class="form-group" class="col-md-6">
+							<br>
+							<label for="extra_"><i>"Ingredients Extres a la <br> següent pàgina."</i></label>
+						</div>
+					</div>
+					<br><br><br>
+					<div class="row">
+						<div class="form-group" class="col-md-3">
+						</div>
+						<div class="form-group" class="col-md-9">
+							<button type="button" class="btn btn-outline-success" (click)="crearHamburguesa()" >Crear Hamburguesa</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group" class="col-md-3">
+						</div>
+						<div class="form-group" class="col-md-9">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">Sortir</span>
+					        </button>
+						</div>
+					</div>
+					<br><br>
+					<div *ngIf="idCategoria != null" class="row">
+						<div class="form-group" class="col-md-6">
+							<input type="submit" value="Següent" class="btn btn-outline-secondary" [disabled]="categoriaForm.invalid">
+						</div>
+					</div>
+				</div>
+			</form>
+      	</div>
+      	<div>
+      		
+      	</div>
+    </div>
+  </div>
+</div>

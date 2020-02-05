@@ -1,0 +1,59 @@
+<div class="col-md-12 mt-3">
+	<h1>
+	  {{page_title}}
+	</h1>
+	<hr>
+	<br>
+	<div *ngIf="precioValido == true">
+		<h5>
+			<u><b>{{plato.nombre}}</b></u>:  
+		</h5>
+		
+		<h6>
+			<strong>Ingredients:</strong>
+			{{plato.descripcion}}
+			<br>
+			
+			<strong *ngIf="existIngExtra == true">Extres: </strong> 
+			<span *ngFor="let ingrediente of ingredientes">
+				<span *ngIf="ingrediente.conjuntoplatos.id == conjuntoPlatos.id">
+					[{{ingrediente.ingrediente.nombre}}]  
+				</span>
+			</span>
+			<span *ngIf="existIngExtra == true">
+				<br>
+			</span>
+			
+			<strong>Preu: </strong> 
+			<i>{{plato.precio | generatePrecio}}€</i>
+		</h6>
+		<br>
+		<hr>
+		<br>
+		<h5 class="col-md-11"><b>Nombre D'Unitats:</b></h5>
+		<div class="col-md-2">
+			<select class="form-control col-md-6" name="cantidad" [(ngModel)]='conjuntoPlatos.cantidad' (ngModelChange)="onChangeCantidad()">
+			  	<option [ngValue]='i' *ngFor='let i of [1,2,3,4,5,6,7,8,9,10]'>{{i}}</option>
+			</select>
+		</div>
+		<br>
+		<hr>
+		<br>
+		<h5>
+			<b>Preu Total: </b> 
+			<i>{{conjuntoPlatos.precioTotal | generatePrecio}} €</i>
+		</h5>
+		<br>
+		<hr>
+		<br>
+		<h5>
+			<button type="submit" value="Següent" class="btn btn-outline-secondary mb-2" (click)="editarConjuntoPlatos()" [routerLink]="['/fer-comanda']">
+				Següent
+			</button>
+		</h5>
+	</div>
+	<div *ngIf="precioValido == false">
+		Caragant...
+	</div>
+</div>
+

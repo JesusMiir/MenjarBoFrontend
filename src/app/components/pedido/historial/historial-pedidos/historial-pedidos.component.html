@@ -1,0 +1,29 @@
+<div class="col-md-12 mt-3">
+	<h3>{{page_title}}</h3>
+	<hr><br>
+	<div *ngIf="validoTamanoEncargos == false">
+		<i>
+			Encara no hi ha comandes realitzades.
+		</i>
+	</div>
+	<div *ngIf="validoTamanoEncargos == true">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th scope="col">Identificador</th>
+				    <th scope="col">Estat</th>
+				    <th scope="col">Informació Restaurant</th> 
+				    <th scope="col">Hora Creació</th>
+				</tr>
+			</thead>
+			<tbody *ngFor="let encargo of encargos">
+				<tr [routerLink]="['/informacio-comanda/', encargo.id]">
+					<td>{{encargo.id}}</td>
+					<td>{{encargo.estado}}</td>
+					<td>{{encargo.informacionrestaurante}}</td>
+					<td>{{encargo.createat.timestamp | generateDate}}</td>
+				</tr>
+			</tbody>	
+		</table>
+	</div>
+</div>

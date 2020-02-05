@@ -1,0 +1,135 @@
+<div class="col-md-12 mt-3">
+	<h1>{{page_title}}</h1>	
+	<hr>
+
+	<div class="alert alert-danger col-md-6 mt-3" *ngIf="status == 'error'">
+		Els camps Hamburguesa i Pa són obligatoris.
+	</div>
+
+	<!-- Forumulario de crear Hamburguesa-->
+	<form #categoriaForm="ngForm" (ngSubmit)="onSubmit(categoriaForm)" class="col-md-12">
+		<br>
+		<div class="container">
+  			<div class="row">
+				<div class="form-group" class="col-md-6">
+					<label for="hamburguesa_"><b>Hamburguesa: *</b></label>
+					<select class="form-control col-md-6" name="hamburguesa_" [(ngModel)]='hamburguesa'>
+					  	<option value='Tria Opció'>Tria Opció</option>
+					  	<option value='Vedella'>Vedella</option>
+					  	<option value='Pollastre'>Pollastre</option>
+					  	<option value='Mixta'>Mixta</option>
+					  	<option value='Verdura'>Verdura</option>
+					</select>
+				</div>
+				<div class="form-group" class="col-md-6">
+					<label for="vegetal3_"><b>Vegetal 3:</b></label>
+					<select class="form-control col-md-6" name="vegetal3_" [(ngModel)]='vegetal3'>
+						<option value='Tria Opció'>Tria Opció</option>
+					  	<option value='Rúcula'>Rúcula</option>
+					  	<option value='Lletuga'>Lletuga</option>
+					  	<option value='Tomàtiga'>Tomàtiga</option>
+					  	<option value='Cogombret'>Cogombret</option>
+					  	<option value='Ceba Crua'>Ceba Crua</option>
+					  	<option value='Ceba A La Planxa'>Ceba A La Planxa</option>
+					  	<option value='Ceba Cruixent'>Ceba Cruixent</option>
+					  	<option value='Ceba Caramel·litzada'>Ceba Caramel·litzada</option>
+					  	<option value='Xampinyons Crus'>Xampinyons Crus</option>
+					  	<option value='Xampinyons a la Planxa'>Xampinyons A La Planxa</option>
+					  	<option value='Pebre'>Pebre</option>
+					</select>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="form-group" class="col-md-6">
+					<label for="pan_"><b>Pa: *</b></label>
+					<select class="form-control col-md-6" name="pan_" [(ngModel)]='pan'>
+						<option value='Tria Opció'>Tria Opció</option>
+						<option value='Clàssic'>Clàssic</option>
+					  	<option value='Blanc Pagès'>Blanc Pagès</option>
+					</select>
+				</div>
+				<div class="form-group" class="col-md-6">
+					<label for="formatge_"><b>Formatge:</b></label>
+					<select class="form-control col-md-6" name="formatge_" [(ngModel)]='queso' (ngModelChange)="cambiarQueso()">
+						<option value='Tria Opció'>Tria Opció</option>
+					  	<option value='Edam'>Edam</option>
+					  	<option value='Formatge s’Arangí Maó-Menorca'>Formatge S’Arangí Maó-Menorca</option>
+					  	<option value='Brie'>Brie</option>
+					  	<option value='Formatge Blau'>Formatge Blau</option>
+					  	<option value='Cabra s’Arangí'>Cabra S’Arangí (+0,30)</option>
+					</select>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="form-group" class="col-md-6">
+					<label for="vegetal1_"><b>Vegetal 1:</b></label>
+					<select class="form-control col-md-6" name="vegetal1_" [(ngModel)]='vegetal1'>
+						<option value='Tria Opció'>Tria Opció</option>
+					  	<option value='Rúcula'>Rúcula</option>
+					  	<option value='Lletuga'>Lletuga</option>
+					  	<option value='Tomàtiga'>Tomàtiga</option>
+					  	<option value='Cogombret'>Cogombret</option>
+					  	<option value='Ceba Crua'>Ceba Crua</option>
+					  	<option value='Ceba A La Planxa'>Ceba A La Planxa</option>
+					  	<option value='Ceba Cruixent'>Ceba Cruixent</option>
+					  	<option value='Ceba Caramel·litzada'>Ceba Caramel·litzada</option>
+					  	<option value='Xampinyons Crus'>Xampinyons Crus</option>
+					  	<option value='Xampinyons a la Planxa'>Xampinyons A La Planxa</option>
+					  	<option value='Pebre'>Pebre</option>
+					</select>
+				</div>
+				<div class="form-group" class="col-md-6">
+					<label for="salsa_"><b>Salsa:</b></label>
+					<select class="form-control col-md-6" name="salsa_" [(ngModel)]='salsa' (ngModelChange)="cambiarSalsa()">
+						<option value='Tria Opció'>Tria Opció</option>
+					  	<option value='Mostassa'>Mostassa</option>
+					  	<option value='Quetxup'>Quetxup</option>
+					  	<option value='Maonesa'>Maonesa</option>
+					  	<option value='Allioli'>Allioli</option>
+					  	<option value='Brava Ingradients'>Brava Ingradients (+0,25)</option>
+					</select>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="form-group" class="col-md-6">
+					<label for="vegetal2_"><b>Vegetal 2:</b></label>
+					<select class="form-control col-md-6" name="vegetal2_" [(ngModel)]='vegetal2'>
+						<option value='Tria Opció'>Tria Opció</option>
+					  	<option value='Rúcula'>Rúcula</option>
+					  	<option value='Lletuga'>Lletuga</option>
+					  	<option value='Tomàtiga'>Tomàtiga</option>
+					  	<option value='Cogombret'>Cogombret</option>
+					  	<option value='Ceba Crua'>Ceba Crua</option>
+					  	<option value='Ceba A La Planxa'>Ceba A La Planxa</option>
+					  	<option value='Ceba Cruixent'>Ceba Cruixent</option>
+					  	<option value='Ceba Caramel·litzada'>Ceba Caramel·litzada</option>
+					  	<option value='Xampinyons Crus'>Xampinyons Crus</option>
+					  	<option value='Xampinyons a la Planxa'>Xampinyons A La Planxa</option>
+					  	<option value='Pebre'>Pebre</option>
+					</select>
+				</div>
+				<div class="form-group" class="col-md-6">
+					<br>
+					<label for="extra_"><i>"Ingredients Extres a la <br> següent pàgina."</i></label>
+				</div>
+			</div>
+			<br><br><br>
+			<div class="row">
+				<div class="form-group" class="col-md-3">
+				</div>
+				<div class="form-group" class="col-md-9">
+					<h5 >Preu Total: {{precio | generatePrecio}}€</h5>
+				</div>
+			</div>
+			<br><br>
+			<div *ngIf="idCategoria != null" class="row">
+				<div class="form-group" class="col-md-6">
+					<input type="submit" value="Següent" class="btn btn-outline-secondary" [disabled]="categoriaForm.invalid">
+				</div>
+			</div>
+		</div>
+	</form>	
+</div>

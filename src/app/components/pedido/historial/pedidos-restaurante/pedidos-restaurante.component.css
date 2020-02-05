@@ -1,0 +1,22 @@
+.pedido {
+	width: 250px;
+	border: 3px solid black;
+	border-radius: 6px;
+	position: absolute;
+	display: block;
+}
+
+.boton1 {
+	width: 85%;
+	border-radius: 0px;
+	border-right: 3px solid black; 
+}
+
+.boton2 {
+	width: 15%;
+	border-radius: 0px;
+}
+
+.boton_finalizar{
+	width: 100%;
+}

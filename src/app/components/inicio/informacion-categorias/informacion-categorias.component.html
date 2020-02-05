@@ -1,0 +1,40 @@
+<div class="col-md-12">
+	<h1>
+	  {{page_title}}
+	</h1>
+	<hr>
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active">
+			<div class="container">
+				<ul class="navbar-nav mr-auto">
+					<div class="row">
+						<li class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4" *ngFor="let categoria of categorias">
+							<div *ngIf="categoria.nombre == 'Pasta Fresca'" class="Pasta cuadro" [routerLink]="['/categoria-restaurant/', categoria.id, categoria.nombre]">
+								<div class="boton">
+									<button type="button" class="btn btn-success btn-lg btn-block noradius">
+										{{categoria.nombre}} 
+									</button>
+								</div>
+							</div>
+							<div *ngIf="categoria.nombre == 'Menú'" class="Menu cuadro" [routerLink]="['/categoria-restaurant/', categoria.id, categoria.nombre]">
+								<div class="boton">
+									<button type="button" class="btn btn-success btn-lg btn-block noradius">
+										{{categoria.nombre}} 
+									</button>
+								</div>
+							</div>
+							<div *ngIf="categoria.nombre != 'Pasta Fresca' && categoria.nombre != 'Menú' && categoria.posicion != 10" class="{{categoria.nombre}} cuadro" [routerLink]="['/categoria-restaurant/', categoria.id, categoria.nombre]">
+								<div class="boton">
+									<button type="button" class="btn btn-success btn-lg btn-block noradius">
+										{{categoria.nombre}} 
+									</button>
+								</div>
+							</div>
+						</li>
+					</div>
+				</ul>	
+			</div>
+		</div>
+	</div>
+	<div id="divHolaMundo"></div>
+</div>

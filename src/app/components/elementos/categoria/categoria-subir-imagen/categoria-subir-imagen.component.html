@@ -1,0 +1,21 @@
+<div class="col-md-12 mt-3">
+	<h1>{{page_title}}</h1>	
+	
+
+	<!-- Forumulario de crear categoría-->
+
+	<form #categoriaForm="ngForm" (ngSubmit)="onSubmit(categoriaForm)" class="col-md-5">
+		<br>
+		<div class="form-group">
+			<label for="image">Penja la imatge de la categoria:</label>
+			<angular-file-uploader 
+				[config]="afuConfig"
+				[resetUpload]=resetVar
+				(ApiResponse)="imagenUpload($event)">
+			</angular-file-uploader>
+		</div>
+		<br>
+		<input type="submit" value="Guardar imatge" class="btn btn-outline-secondary" [disabled]="categoriaForm.invalid">
+	</form>	
+
+</div>

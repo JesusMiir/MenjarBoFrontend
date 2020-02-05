@@ -1,0 +1,68 @@
+<div class="col-md-12 mt-3">
+	<h1>{{page_title}}</h1>
+	<p *ngIf = "status != 'success' && status != 'error'">
+	  Modifica la teva informació d'usuari.
+	</p>
+
+	
+	<div class="alert alert-success col-md-6 mt-3" *ngIf="status == 'success'">
+		La informació s'ha actualitzat correctament
+	</div>
+
+	<div class="alert alert-danger col-md-6 mt-3" *ngIf="status == 'error'">
+		La informació no s'ha actualitzat correctament
+	</div>		
+	
+
+	<!-- Forumulario de registro-->
+	<form class="col-md-5 ml-0 pl-0" #editarUsuarioForm="ngForm" (ngSubmit)="onSubmit(editarUsuarioForm)">
+		<div class="form-group">
+			<label for="name">Nom</label>
+			<input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="usuario.nombre" required pattern="[a-zA-ZÁÉÍÓÚÀÈÒáéíóúàèòÑñ·]+">
+
+			<small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+				El nom no és vàlid
+			</small>
+		</div>
+
+		<div class="form-group">
+			<label for="surname">Cognoms</label>
+			<input type="text" name="surname" class="form-control" #surname="ngModel" [(ngModel)]="usuario.apellidos" required pattern="[a-zA-ZÁÉÍÓÚÀÈÒáéíóúàèòÑñ·\s]+">
+
+			<small *ngIf="!surname.valid && surname.touched" class="invalid-feedback d-block">
+				Els cognoms no són válids
+			</small>
+		</div>
+
+		<div class="form-group">
+			<label for="email">Email</label>
+			<input type="email" name="email" class="form-control" #email="ngModel" [(ngModel)]="usuario.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+
+			<small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">
+				El correu no és vàlid
+			</small>
+		</div>
+
+		<div class="form-group">
+			<label for="password">Contrasenya</label>
+			<small> (La contrasenya només se modificarà si hi ha canvis) </small>
+			<input type="password" name="password" class="form-control" #password="ngModel" [(ngModel)]="usuario.contrasena">
+		</div>
+
+		<div class="form-group">
+			<label for="direccion">Adreça Del Domicili</label>
+			<input type="text" name="direccion" class="form-control" #direccion="ngModel" [(ngModel)]="usuario.direccionCasa">
+		</div>
+
+		<div class="form-group">
+			<label for="telefono">Telèfono</label>
+			<input type="text" name="telefono" class="form-control" #telefono="ngModel" [(ngModel)]="usuario.telefono" pattern="[0-9]+">
+
+			<small *ngIf="!telefono.valid && telefono.touched" class="invalid-feedback d-block">
+				El telèfono no es vàlid
+			</small>
+		</div>
+
+		<input type="submit" value="Editar" class="btn btn-outline-secondary" [disabled]="editarUsuarioForm.invalid"/>
+	</form>
+</div>

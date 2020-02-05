@@ -1,0 +1,21 @@
+<div class="col-md-12 mt-3">
+	<h1>
+	  {{page_title}}
+	</h1>
+	<hr><br>
+	<div class="container">
+		<ul class="navbar-nav mr-auto">
+			<div class="row">
+				<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" *ngFor="let plato of platos">
+					<li class="nav-item" >
+						<h4><u>{{plato.nombre}}</u></h4> 
+						<span *ngIf="plato.descripcion != ''"><strong>Ingredients: </strong> {{plato.descripcion}} <br></span>
+						<i>Preu: {{plato.precio | generatePrecio}}€</i>
+						<br><br> 
+					</li>
+				</div>
+			</div>
+		</ul>
+	</div>
+
+</div>

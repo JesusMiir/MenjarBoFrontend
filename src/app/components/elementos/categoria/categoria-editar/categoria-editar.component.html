@@ -1,0 +1,27 @@
+<div class="col-md-12 mt-3">
+	<h1>{{page_title}}</h1>
+	<br>
+	
+	<div class="alert alert-success col-md-6 mt-3" *ngIf="status == 'success'">
+		La categoria s'ha modificat correctament
+	</div>
+
+	<div class="alert alert-danger col-md-6 mt-3" *ngIf="status == 'error'">
+		La categoria no s'ha modificat correctament
+	</div>		
+	
+
+	<!-- Forumulario de crear categoría-->
+
+	<form #categoriaForm="ngForm" (ngSubmit)="onSubmit(categoriaForm)" class="col-md-5">
+		<div class="form-group">
+			<label for="nombre">Canvia el nom de la categoia:</label>
+			<input type="text" name="nombre" class="form-control" #nombre="ngModel" [(ngModel)]="categoria.nombre" required />
+			<small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">
+				El nombre de la categoria no és vàlit
+			</small>
+		</div>
+		<input type="submit" value="Guardar" class="btn btn-outline-secondary" [disabled]="categoriaForm.invalid">
+	</form>	
+
+</div>

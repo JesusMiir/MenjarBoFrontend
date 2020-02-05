@@ -1,0 +1,70 @@
+<div class="col-md-12 mt-3">
+	<h1>
+		{{page_title}}
+	</h1>
+	<hr>
+	<br>
+		<h5><b>Ingredients:</b></h5>
+		<h5>{{plato.descripcion}}</h5>
+		
+	<div *ngIf="ingredienteExtra == true">	
+		
+		<table class="table table-borderless">
+			<thead class="col-md-12 mt-12">
+				<tr>
+					<th scope="col"></th>
+					<th scope="col"></th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody *ngFor='let ingrediente of ingredientesPlato'>
+				<tr>
+					<td class="col-mt-4">
+						<b>+</b> {{ingrediente.ingrediente.nombre}} 
+						{{ingrediente.ingrediente.descripcion}} (<i>+{{ingrediente.ingrediente.precio | generatePrecio}}€</i>)
+					</td>
+					<td class="col-mt-4">
+						<button type="button" class="btn btn-outline-danger" (click)="eliminarIngredienteExtra(ingrediente.id)"> 
+							<small> X </small> 
+						</button>
+					</td>
+					<td class="col-mt-4"></td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</div>
+	<br><br>
+	<h5>
+		<b>Preu Del Plat:</b> 
+		{{precioPlato | generatePrecio}}€
+	</h5>
+	<br>
+	<form>
+		<div *ngIf="ingredienteValido" class="container form-group">
+			<hr>
+			<br>
+			<label><h5><b>Ingredient Extre:</b></h5></label>
+			<br>
+			<div class="row">
+				<div class="col-md-3">
+					<select class="form-control col-md-12 " name="ingrediente" [(ngModel)]='ingrediente'>
+					  	<option [ngValue]='ingrediente' *ngFor='let ingrediente of ingredientes' >{{ingrediente.nombre}} +{{ingrediente.precio | generatePrecio}}€</option>
+					</select>
+				</div>
+				<div class="col-md-9">
+					<button type="submit" value="Afegir" class="btn btn-outline-success mb-2" (click)="crearConjuntoIngrediente()"> <b>+</b> Afegir Ingredient
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+	<br>
+	<hr>
+	<br>
+	<h5>
+		<button type="submit" value="Següent" class="btn btn-outline-secondary mb-2" (click)="editarConjuntoPlatos()" [routerLink]="['/unitats-del-plat/', idConjuntoPlatos]">
+			Següent
+		</button>
+	</h5>
+</div>

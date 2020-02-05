@@ -1,0 +1,332 @@
+<div class="col-md-12 mt-3">
+	<h1><b>{{page_title}}</b></h1>
+	<hr><br>
+
+	
+	<div class="container ">
+		<div class="row">
+			<div class="col-3 column-container">
+				<h2><u><b>Demanat</b></u></h2>
+				<br>
+				
+					<div class="list"
+						cdkDropList
+						#pedidos="cdkDropList"
+						[cdkDropListData]="encargosPedidos"
+						[cdkDropListConnectedTo]="[confirmados, cocina, camino]"
+						(cdkDropListDropped)="onDrop($event)">
+						<div *ngFor="let encargo of encargosPedidos" cdkDrag>
+							<span *ngIf="encargo.vivienda != ''" class="pedido">
+								<button *ngIf="encargo.vivienda == 'Recollir' && encargo.efectivo" type="button" class="btn btn-secondary col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b>{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ - {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Poble' && encargo.efectivo" type="button" class="btn btn-primary col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b>{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ - {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Urbanitzacio' && encargo.efectivo" type="button" class="btn btn-info col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" >
+								  <b>{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ - {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Recollir' && !encargo.efectivo" type="button" class="btn btn-secondary col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b style="color:#FFFF00;">{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ - {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Poble' && !encargo.efectivo" type="button" class="btn btn-primary col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b style="color:#FFFF00;">{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ - {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Urbanitzacio' && !encargo.efectivo" type="button" class="btn btn-info col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b style="color:#FFFF00;">{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ - {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+
+								<button type="button" class="btn btn-danger col-12 boton2" data-toggle="modal" data-target="#exampleModalCenter" (click)="clickEncargo(encargo, 'Demanat')">
+									X
+								</button>
+							</span>
+							<br><br>
+						</div>
+					</div>
+				
+			</div>
+			<div class="col-3 column-container">
+				<h2><u><b>Confirmat</b></u></h2>
+				<br>
+				
+					<div class="list"
+						cdkDropList
+						#confirmados="cdkDropList"
+						[cdkDropListData]="encargosConfirmados"
+						[cdkDropListConnectedTo]="[pedidos, cocina, camino]"
+						(cdkDropListDropped)="onDrop($event)">
+						<div *ngFor="let encargo of encargosConfirmados" cdkDrag>
+							<span *ngIf="encargo.vivienda != ''" class="pedido">
+								<button *ngIf="encargo.vivienda == 'Recollir' && encargo.efectivo" type="button" class="btn btn-secondary col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')" (dblclick)="func2()">
+								  <b>{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ - {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Poble' && encargo.efectivo" type="button" class="btn btn-primary col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')" (dblclick)="func2()">
+								  <b>{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ -  {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Urbanitzacio' && encargo.efectivo" type="button" class="btn btn-info col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')" (dblclick)="func2()">
+								  <b>{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ -  {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Recollir' && !encargo.efectivo" type="button" class="btn btn-secondary col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b style="color:#FFFF00;">{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ -  {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Poble' && !encargo.efectivo" type="button" class="btn btn-primary col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b style="color:#FFFF00;">{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ -  {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Urbanitzacio' && !encargo.efectivo" type="button" class="btn btn-info col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b style="color:#FFFF00;">{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ -  {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button type="button" class="btn btn-danger col-12 boton2" data-toggle="modal" data-target="#exampleModalCenter" (click)="clickEncargo(encargo, 'Confirmat')">
+									X
+								</button>
+							</span>
+							<br><br>
+						</div>
+					</div>
+				
+			</div>
+			<div class="col-3 column-container">
+				<h2><u><b>Cuina</b></u></h2>
+				<br>
+				
+					<div class="list"
+						cdkDropList
+						#cocina="cdkDropList"
+						[cdkDropListData]="encargosCocina"
+						[cdkDropListConnectedTo]="[pedidos, confirmados, camino]"
+						(cdkDropListDropped)="onDrop($event)">
+						<div *ngFor="let encargo of encargosCocina" cdkDrag>
+							<div *ngIf="encargo.vivienda != ''" class="pedido">
+								<button *ngIf="encargo.vivienda == 'Recollir' && encargo.efectivo" type="button" class="btn btn-secondary col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b>{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ -  {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Poble' && encargo.efectivo" type="button" class="btn btn-primary col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b>{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ -  {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Urbanitzacio' && encargo.efectivo" type="button" class="btn btn-info col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b>{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ -  {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Recollir' && !encargo.efectivo" type="button" class="btn btn-secondary col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b style="color:#FFFF00;">{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ -  {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Poble' && !encargo.efectivo" type="button" class="btn btn-primary col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b style="color:#FFFF00;">{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ -  {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Urbanitzacio' && !encargo.efectivo" type="button" class="btn btn-info col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b style="color:#FFFF00;">{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ -  {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button type="button" class="btn btn-danger col-12 boton2" data-toggle="modal" data-target="#exampleModalCenter" (click)="clickEncargo(encargo, 'Cuina')">
+									X
+								</button>
+							</div>
+							<br><br>
+						</div>
+					
+				</div>
+			</div>
+			<div class="col-3 column-container">
+				<h2><u><b>De Camí</b></u></h2>
+				<br>
+				
+					<div class="list"
+						cdkDropList
+						#camino="cdkDropList"
+						[cdkDropListData]="encargosCamino"
+						[cdkDropListConnectedTo]="[pedidos, confirmados, cocina]"
+						(cdkDropListDropped)="onDrop($event)">
+						<div *ngFor="let encargo of encargosCamino" cdkDrag>
+							<div *ngIf="encargo.vivienda != ''" class="pedido">
+								<button *ngIf="encargo.vivienda == 'Recollir' && encargo.efectivo" type="button" class="btn btn-secondary col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b>{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ -  {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Poble' && encargo.efectivo" type="button" class="btn btn-primary col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b>{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ -  {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Urbanitzacio' && encargo.efectivo" type="button" class="btn btn-info col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b>{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ -  {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Recollir' && !encargo.efectivo" type="button" class="btn btn-secondary col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b style="color:#FFFF00;">{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ -  {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Poble' && !encargo.efectivo" type="button" class="btn btn-primary col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b style="color:#FFFF00;">{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ -  {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button *ngIf="encargo.vivienda == 'Urbanitzacio' && !encargo.efectivo" type="button" class="btn btn-info col-12 boton1" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="clickEncargo(encargo, '')">
+								  <b style="color:#FFFF00;">{{encargo.id}} - {{encargo.preciototal | generatePrecio}}€ -  {{encargo.createat.timestamp | generateHour}}</b>
+								</button>
+								<button type="button" class="btn btn-danger col-12 boton2" data-toggle="modal" data-target="#exampleModalCenter" (click)="clickEncargo(encargo, 'Cami')">
+									X
+								</button>
+							</div>
+							<br><br>
+						</div>
+					</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+		<div class="modal-header">
+			<h2 class="modal-title" id="exampleModalLabel">
+				<b>Comanda [ {{encargo.id}} ] </b>
+			</h2>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<br><br>
+			<h4><b>Información Usuario:</b></h4>
+	  		<br>
+	  		<table class="table table-borderless">
+	  			<thead>
+	  			</thead>
+	  			<tbody>
+	  				<tr>
+	  					<th>Nom: </th>
+	  					<td>{{usuario.nombre}} {{usuario.apellidos}}</td>
+	  				</tr>
+	  				<tr>
+	  					<th>Direcció: </th>
+	  					<td>{{usuario.direccioncasa}}</td>
+	  				</tr>
+	  				<tr>
+	  					<th>Telèfon: </th>
+	  					<td>{{usuario.telefono}}</td>
+	  				</tr>
+	  				<tr *ngIf="encargo.informacionusuario != ''">
+	  					<th>Informació Usuari: </th>
+	  					<td>{{encargo.informacionusuario}}</td>
+	  				</tr>
+	  			</tbody>
+	  		</table>
+	  		<br>
+			<br>
+		  	<h4><b>Plats De La Comanda:</b></h4>
+			<br><br>
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item" *ngFor="let plato of conjuntoPlatos">
+					<span *ngIf="plato.plato != null && plato.precioTotal != 0">
+						<h5>
+							<u><b>{{plato.plato.nombre}}</b></u>: 
+						</h5>
+						<h6>
+							<strong>Ingredients:</strong>
+							{{plato.plato.descripcion}}
+							<br>
+							<strong *ngIf="plato.existIngExtra == true">Extres: </strong> 
+							<span *ngFor="let ingrediente of ingredientes">
+								<span *ngIf="ingrediente.conjuntoplatos.id == plato.id">
+									[{{ingrediente.ingrediente.nombre}}]  
+								</span>
+							</span>
+							<span *ngIf="plato.existIngExtra == true">
+								<br>
+							</span>
+							<strong>Quantitat: </strong>
+							{{plato.cantidad}}
+							<br>
+							<strong>Preu: </strong> 
+							<i>{{plato.precioTotal | generatePrecio}}€</i>
+						</h6>
+						<br>
+					</span>
+				</li>
+			</ul>
+			<br>
+			<h5><b>Preu Total:</b> {{encargo.preciototal | generatePrecio}}€</h5>
+			<br>
+			<br><br>
+	  		<h4><b>Modificar Informació Comanda:</b></h4>
+	  		<br>
+	  		<div *ngIf="status == 'success'">
+	  			<div class="p-3 mb-2 bg-success text-white col-6">
+	  				Comunicat restaurant no realitzat. 
+	  				<br>
+	  			</div>
+	  			<br>
+	  		</div>
+	  		<div *ngIf="status == 'error'"> 
+	  			<div class="p-3 mb-2 bg-danger text-white col-6">
+	  				Comunicat restaurant no realitzat. 
+	  				<br>
+	  			</div>
+	  			<br>
+	  		</div>
+	  		<form class="col-md-5 ml-0 pl-0" #editarUsuarioForm="ngForm" (ngSubmit)="onSubmit(editarEstadoEncargoForm)">
+				<div class="form-group">
+					<label for="infoRestaurante">Editar Comunicat Restaurant:</label>
+					<input type="text" name="infoRestaurante" class="form-control" #infoRestaurante="ngModel" [(ngModel)]="encargo.informacionrestaurante">
+				</div>
+				<input type="submit" value="Editar" class="btn btn-outline-secondary"/>
+			</form>
+	  		<br><br>
+	  		<h4><b>Informació Extra:</b></h4>
+	  		<br><br>
+	  		<table class="table table-borderless">
+	  			<thead>
+	  			</thead>
+	  			<tbody>
+	  				<tr>
+	  					<th>Entrega de la comanda: </th>
+	  					<td>{{encargo.vivienda}}</td>
+	  					<td></td>
+	  					<td></td>
+	  					<td></td>
+	  					<td></td>
+	  					<td></td>
+	  					<td></td>
+	  				</tr>
+	  				<tr>
+	  					<th >Forma de pagament:</th>
+	  					<td *ngIf="encargo.efectivo">Efectiu</td>
+	  					<td *ngIf="!encargo.efectivo">Targeta</td>
+	  					<td></td>
+	  					<td></td>
+	  					<td></td>
+	  					<td></td>
+	  					<td></td>
+	  					<td></td>
+	  				</tr>
+	  			</tbody>
+	  		</table>
+	  		<br><br>
+	  	</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Finalitzar Comanda</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div class="container">
+      		<br>
+      		<div class="row">
+      			<div class="col-md-1"></div>
+      			<div class="col-md-5">
+      				<button type="button" class="btn btn-success boton_finalizar" data-dismiss="modal" aria-label="Close" (click)="finalizarPedido(encargo, 'Finalitzat')"><b>Finalitzat</b></button>
+      			</div>
+      			<div class="col-md-5">
+      				<button type="button" class="btn btn-danger boton_finalizar" data-dismiss="modal" aria-label="Close" (click)="finalizarPedido(encargo, 'Anul·lat')"><b>Anul·lat</b></button>
+      			</div>
+      			<div class="col-md-1"></div>
+      		</div>
+      		<br>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="col-md-12 mt-3">
+	<h1>{{page_title}}</h1>
+	<br>
+	
+	<div class="alert alert-success col-md-6 mt-3" *ngIf="status == 'success'">
+		L'horari s'ha modificat correctament
+	</div>
+
+	<div class="alert alert-danger col-md-6 mt-3" *ngIf="status == 'error'">
+		L'horari no s'ha modificat correctament
+	</div>		
+	
+
+	<!-- Forumulario de crear menú -->
+	
+	<form #horarioForm="ngForm" (ngSubmit)="onSubmit(horarioForm)" class="col-md-5">
+		<div class="form-group">
+			<label for="lunesM">Dilluns Matí:</label>
+			<input type="text" name="lunesM" class="form-control" #lunesM="ngModel" [(ngModel)]="horario.lunesM"/>
+		</div>
+		<div class="form-group">
+			<label for="lunesT">Dilluns Capvespre:</label>
+			<input type="text" name="lunesT" class="form-control" #lunesT="ngModel" [(ngModel)]="horario.lunesT"/>
+		</div>
+		<div class="form-group">
+			<label for="martesM">Dimarts Matí:</label>
+			<input type="text" name="martesM" class="form-control" #martesM="ngModel" [(ngModel)]="horario.martesM"/>
+		</div>
+		<div class="form-group">
+			<label for="martesT">Dimarts Capvespre:</label>
+			<input type="text" name="martesT" class="form-control" #martesT="ngModel" [(ngModel)]="horario.martesT"/>
+		</div>
+		<div class="form-group">
+			<label for="miercolesM">Dimecres Matí:</label>
+			<input type="text" name="miercolesM" class="form-control" #miercolesM="ngModel" [(ngModel)]="horario.miercolesM"/>
+		</div>
+		<div class="form-group">
+			<label for="miercolesT">Dimecres Capvespre:</label>
+			<input type="text" name="miercolesT" class="form-control" #miercolesT="ngModel" [(ngModel)]="horario.miercolesT"/>
+		</div>
+		<div class="form-group">
+			<label for="juevesM">Dijous Matí:</label>
+			<input type="text" name="juevesM" class="form-control" #juevesM="ngModel" [(ngModel)]="horario.juevesM"/>
+		</div>
+		<div class="form-group">
+			<label for="juevesT">Dijous Capvespre:</label>
+			<input type="text" name="juevesT" class="form-control" #juevesT="ngModel" [(ngModel)]="horario.juevesT"/>
+		</div>
+		<div class="form-group">
+			<label for="viernesM">Divendres Matí:</label>
+			<input type="text" name="viernesM" class="form-control" #viernesM="ngModel" [(ngModel)]="horario.viernesM"/>
+		</div>
+		<div class="form-group">
+			<label for="viernesT">Divendres Capvespre:</label>
+			<input type="text" name="viernesT" class="form-control" #viernesT="ngModel" [(ngModel)]="horario.viernesT"/>
+		</div>
+		<div class="form-group">
+			<label for="sabadoM">Dissabte Matí:</label>
+			<input type="text" name="sabadoM" class="form-control" #sabadoM="ngModel" [(ngModel)]="horario.sabadoM"/>
+		</div>
+		<div class="form-group">
+			<label for="sabadoT">Dissabte Capvespre:</label>
+			<input type="text" name="sabadoT" class="form-control" #sabadoT="ngModel" [(ngModel)]="horario.sabadoT"/>
+		</div>
+		<div class="form-group">
+			<label for="domingoM">Diumenge Matí:</label>
+			<input type="text" name="domingoM" class="form-control" #domingoM="ngModel" [(ngModel)]="horario.domingoM"/>
+		</div>
+		<div class="form-group">
+			<label for="domingoT">Diumenge Capvespre:</label>
+			<input type="text" name="domingoT" class="form-control" #domingoT="ngModel" [(ngModel)]="horario.domingoT"/>
+		</div>
+		<input type="submit" value="Guardar" class="btn btn-outline-secondary">
+	</form>	
+</div>

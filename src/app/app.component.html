@@ -1,0 +1,97 @@
+<div class="container"> <!-- contenedor Principal-->
+	<br>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <!-- Barra De Navegación -->
+	  <a class="navbar-brand" [routerLink]="['/inici']">Ingredients</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto">
+	        <li class="nav-item">
+	          <a class="nav-link" [routerLink]="['/horari/informacio']">Horari</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" [routerLink]="['/restaurant/informacio']">Informació</a>
+	        </li>
+	    </ul>
+
+	    <!-- NO IDENTIFICADO -->
+	    <ul class="navbar-nav navbar-right" *ngIf = "!identity">
+	    	<li class="nav-item active">
+	    		<a class="nav-link" [routerLink]="['/login']">Login</a>
+	    	</li>
+	    	<li class="nav-item">
+	    		<a class="nav-link" [routerLink]="['/registre']">Registrar</a>
+	    	</li>
+	    </ul>
+
+	     <!-- USUARIO -->
+	    <ul class="navbar-nav navbar-right" *ngIf ="identity && identity.nombre && restauranteValidacion != 'true'">
+	    	
+	    	<li class="nav-item">
+	    		<a class="nav-link" [routerLink]="['/fer-comanda']">Fer Comanda</a>
+	    	</li>
+			<li class="nav-item">
+	    		<a class="nav-link" [routerLink]="['/historial-comandes']">Comandes Realitzades</a>
+	    	</li>
+	    	<li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          {{ identity.nombre + ' ' + identity.apellidos }}
+		        </a>
+		        <!-- Valor D'Usuari-->
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			          <a class="dropdown-item" [routerLink]="['/configuracio']">Configuració</a>
+			          <div class="dropdown-divider"></div>
+			          <a class="dropdown-item" [routerLink]="['logout/1']">Sortir</a>
+		        </div>
+	      </li>	
+	    </ul>
+
+	    <!-- RESTAURANTE -->
+	    <ul class="navbar-nav navbar-right" *ngIf ="identity && identity.nombre && restauranteValidacion == 'true'">
+	    	<li class="nav-item">
+	    		<a class="nav-link" [routerLink]="['/restaurant/comandes']">Comandes</a>
+	    	</li>
+	    	<li class="nav-item dropdown">
+	    		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Elements
+		        </a>
+		        <!-- Valor D'Usuari-->
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			          <a class="dropdown-item" [routerLink]="['/categoria/totes']">Categories</a>
+			          <a class="dropdown-item" [routerLink]="['/plat/tots']">Plats</a>
+			          <a class="dropdown-item" [routerLink]="['/ingredient/tots']">Ingredients</a>
+			          <a class="dropdown-item" [routerLink]="['/menu/tots']">Menús</a>
+		        </div>		
+	    	</li>
+	    	<li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Opcions
+		        </a>
+		        <!-- Valor D'Usuari-->
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		        	<a class="dropdown-item" [routerLink]="['/restaurant/temps-espera']">Opcions Comanda</a>
+		        	<a class="dropdown-item" [routerLink]="['/restaurant/horari/editar']">Horari</a>
+		        	<!--<a class="dropdown-item" [routerLink]="['/restaurant/facturacio']">Facturació</a>-->
+			        <a class="dropdown-item" [routerLink]="['/restaurant/configuracio']">Configuració</a>
+			        <div class="dropdown-divider"></div>
+			        <a class="dropdown-item" [routerLink]="['/restaurant/logout/1']">Sortir</a>
+		        </div>
+	      </li>	
+	    </ul>
+	  </div>
+	</nav> <!-- Cerrar Barra Navegación -->
+
+	<br><br>
+	<div class="container">
+		<router-outlet></router-outlet>
+	</div>
+	<br><br>
+	<footer align="center">
+		<hr>
+		<br> 
+		Menjar Bo &copy; 2019 
+		<br><br><br>
+	</footer>
+<div>

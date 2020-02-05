@@ -1,0 +1,53 @@
+<div class="col-md-12 mt-3">
+	<h1>{{page_title}}</h1>
+	<p *ngIf = "status != 'success' && status != 'error'">
+	  Crea un nou plat.
+	</p>
+
+	
+	<div class="alert alert-success col-md-6 mt-3" *ngIf="status == 'success'">
+		El plat s'ha creat correctament
+	</div>
+
+	<div class="alert alert-danger col-md-6 mt-3" *ngIf="status == 'error'">
+		El plat no s'ha creat correctament
+	</div>		
+	
+
+	<!-- Forumulario de crear categoría-->
+
+	<form #platoForm="ngForm" (ngSubmit)="onSubmit(categoriaForm)" class="col-md-5">
+		<div class="form-group">
+			<label for="nombre">Nom</label>
+			<input type="text" name="nombre" class="form-control" #nombre="ngModel" [(ngModel)]="plato.nombre" required />
+			<small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">
+				El nom del plat no és vàlid
+			</small>
+		</div>
+		<div class="form-group">
+			<label for="descripcion">Descripció</label>
+			<input type="text" name="descripcion" class="form-control" #descripcion="ngModel" [(ngModel)]="plato.descripcion" />
+			<small *ngIf="!descripcion.valid && descripcion.touched" class="invalid-feedback d-block">
+				La descripció del plat no és válida
+			</small>
+		</div>
+		<div class="form-group">
+			<label for="precio">Precio</label>
+			<input type="text" name="precio" class="form-control" #precio="ngModel" [(ngModel)]="plato.precio" required pattern="[0-9.,]+"/>
+			<small *ngIf="!precio.valid && precio.touched" class="invalid-feedback d-block">
+				El preu del plat no és vàlid
+			</small>
+		</div>
+		<div class="form-group">
+			<label for="nombreCategoria"> Categoria </label>
+			<select class="browser-default custom-select" name="nombreCategoria" class="form-control" #nombreCategoria="ngModel" [(ngModel)]="plato.nombreCategoria" required>
+			  	<option *ngFor="let categoria of categorias" [value]="categoria.nombre">{{categoria.nombre}}</option>
+			</select>
+			<small *ngIf="!nombreCategoria.valid && nombreCategoria.touched" class="invalid-feedback d-block">
+				La categoria del plat no és vàlida
+			</small>
+		</div>
+		<input type="submit" value="Guardar" class="btn btn-outline-secondary" [disabled]="platoForm.invalid">
+	</form>	
+
+</div>
